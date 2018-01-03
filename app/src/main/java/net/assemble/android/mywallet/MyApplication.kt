@@ -4,6 +4,7 @@ import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.lazy
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -37,5 +38,12 @@ class MyApplication : BaseApplication() {
 
         // Initialize Preferences
         Preferences.init(applicationContext)
+
+        // Initialize AdMob
+        MobileAds.initialize(this, ADMOB_APP_ID)
+    }
+
+    companion object {
+        private const val ADMOB_APP_ID = "ca-app-pub-6511207727081425~9483318604"
     }
 }

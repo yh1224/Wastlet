@@ -33,19 +33,11 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <com.google.android.gms.ads.AdView
-                    android:id="@+id/adView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:adSize="BANNER"
-                    app:adUnitId="@string/banner_ad_unit_id"
-                    app:layout_behavior="@string/bottom_sheet_behavior"
-                    tools:layout_behavior="@string/bottom_sheet_behavior" />
-
                 <FrameLayout
                     android:id="@+id/content"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     tools:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -72,6 +64,15 @@
                             android:paddingTop="12dp" />
                     </android.support.v4.view.ViewPager>
                 </FrameLayout>
+
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/adView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:adSize="BANNER"
+                    app:adUnitId="@string/banner_ad_unit_id"
+                    app:layout_behavior="@string/bottom_sheet_behavior"
+                    tools:layout_behavior="@string/bottom_sheet_behavior" />
             </LinearLayout>
         </android.support.design.widget.CoordinatorLayout>
 
