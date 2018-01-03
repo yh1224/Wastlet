@@ -76,18 +76,10 @@ class MainActivity : BaseActivity()
         binding.drawerLayout.addDrawerListener(drawerToggle)
         binding.drawerNavigation.setNavigationItemSelectedListener(this)
 
-        if (firebaseAuth.currentUser == null) {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-            return
-        }
-
         // Load an ad into the AdMob banner view.
         val adView = findViewById(R.id.adView) as AdView
         val adRequest = AdRequest.Builder().setRequestAgent("android_studio:ad_template").build()
         adView.loadAd(adRequest)
-
-        initView()
 
         disposables += bus.toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -100,6 +92,12 @@ class MainActivity : BaseActivity()
                         is WalletItemAdapter.OnItemClickEvent -> startEditActivity(event.itemInfo)
                     }
                 }
+
+        if (firebaseAuth.currentUser == null) {
+            startActivityForResult(Intent(this, LoginActivity::class.java), REQUEST_LOGIN)
+        } else {
+            initView()
+        }
     }
 
     /**
@@ -168,6 +166,16 @@ class MainActivity : BaseActivity()
         return true
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_LOGIN) {
+            if (resultCode == RESULT_OK) {
+                initView()
+            } else {
+                finish()
+            }
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
 
@@ -188,6 +196,8 @@ class MainActivity : BaseActivity()
     companion object {
         @Suppress("unused")
         private val TAG = MainActivity::class.java.simpleName
+
+        private const val REQUEST_LOGIN = 1
 
         private const val MONTH_FORMAT = "yyyy/MM"
     }
