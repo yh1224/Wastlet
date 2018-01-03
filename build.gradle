@@ -5,10 +5,15 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "io.realm:realm-gradle-plugin:3.1.3"
+        classpath 'com.google.gms:google-services:3.1.1'
+        //noinspection GradleDynamicVersion
+        classpath 'io.fabric.tools:gradle:1.+'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -24,4 +29,28 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+// Version
+def version_major = 0
+def version_minor = 1
+def version_patch = 0
+
+project.ext {
+    packageName = 'net.assemble.android.mywallet'
+
+    compileSdkVersion = 25
+    minSdkVersion = 19
+    targetSdkVersion = compileSdkVersion
+
+    supportLibVersion = "25.4.0"
+    firebaseLibVersion = "11.6.2"
+    playServicesVersion = "11.6.2"
+
+    versionCode = {
+        return version_major * 10000 + version_minor * 100 + version_patch
+    }
+    versionName = {
+        return "${version_major}.${version_minor}.${version_patch}"
+    }
 }
