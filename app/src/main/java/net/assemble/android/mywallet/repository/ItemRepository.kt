@@ -44,7 +44,7 @@ class ItemRepository(
         return itemsRef()
                 .whereGreaterThanOrEqualTo(WalletItem.KEY_DATE, start.toInstant().toEpochMilli())
                 .whereLessThan(WalletItem.KEY_DATE, end.toInstant().toEpochMilli())
-                .orderBy(WalletItem.KEY_DATE, Query.Direction.DESCENDING).get()
+                .orderBy(WalletItem.KEY_DATE, Query.Direction.ASCENDING).get()
                 .toSingle()
                 .map { querySnapshot ->
                     querySnapshot.map { documentSnapshot ->

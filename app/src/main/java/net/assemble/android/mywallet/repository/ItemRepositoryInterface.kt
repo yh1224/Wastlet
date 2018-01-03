@@ -16,8 +16,8 @@ interface ItemRepositoryInterface {
     /**
      * 指定月のアイテムを取得
      *
-     * @param year 年
-     * @param month 月
+     * @param year 年(4桁)
+     * @param month 月(1～12)
      */
     fun getMonthly(year: Int, month: Int): Single<List<WalletItem>>
 
