@@ -50,7 +50,7 @@ class ItemEditFragment : BaseFragment()
         form = if (savedInstanceState != null) {
             savedInstanceState.getSerializable(ARG_ITEM_INFO) as ItemEditForm
         } else {
-            val itemInfo = (arguments.getSerializable(ARG_ITEM_INFO) as WalletItem).copy()
+            val itemInfo = (arguments!!.getSerializable(ARG_ITEM_INFO) as WalletItem).copy()
             ItemEditForm(itemInfo.id).apply {
                 fee.set(itemInfo.fee.toString())
                 note.set(itemInfo.note)

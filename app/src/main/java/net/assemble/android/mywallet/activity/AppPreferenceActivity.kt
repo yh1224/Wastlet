@@ -15,7 +15,7 @@ class AppPreferenceActivity : BaseActivity() {
 
         setContentView(R.layout.preference_activity)
 
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)!!
         setSupportActionBar(toolbar)
         supportActionBar?.setTitle(R.string.settings)
         supportActionBar?.setHomeButtonEnabled(true)

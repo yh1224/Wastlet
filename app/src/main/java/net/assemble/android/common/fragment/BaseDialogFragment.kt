@@ -2,7 +2,6 @@ package net.assemble.android.common.fragment
 
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
-import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.KodeinInjected
 import com.github.salomonbrys.kodein.KodeinInjector
 import com.github.salomonbrys.kodein.android.SupportFragmentInjector

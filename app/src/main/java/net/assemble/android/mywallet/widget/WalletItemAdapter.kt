@@ -18,9 +18,9 @@ class WalletItemAdapter(
         private val bus: RxBus
 ) : RecyclerView.Adapter<WalletItemAdapter.ItemViewHolder>() {
     class ItemViewHolder(itemView: View) : ViewHolder(itemView) {
-        val date = itemView.findViewById(R.id.itemDate) as TextView
-        val note = itemView.findViewById(R.id.itemNote) as TextView
-        val fee = itemView.findViewById(R.id.itemFee) as TextView
+        val date = itemView.findViewById<TextView>(R.id.itemDate)!!
+        val note = itemView.findViewById<TextView>(R.id.itemNote)!!
+        val fee = itemView.findViewById<TextView>(R.id.itemFee)!!
     }
 
     class OnItemClickEvent(val itemInfo: WalletItem)

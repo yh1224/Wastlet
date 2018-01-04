@@ -77,7 +77,7 @@ class MainActivity : BaseActivity()
         binding.drawerNavigation.setNavigationItemSelectedListener(this)
 
         // Load an ad into the AdMob banner view.
-        val adView = findViewById(R.id.adView) as AdView
+        val adView = findViewById<AdView>(R.id.adView)!!
         val adRequest = AdRequest.Builder().setRequestAgent("android_studio:ad_template").build()
         adView.loadAd(adRequest)
 
@@ -106,7 +106,7 @@ class MainActivity : BaseActivity()
      * @param itemInfo 追加・変更したアイテム
      */
     private fun initView(itemInfo: WalletItem? = null) {
-        val pager = findViewById(R.id.pager) as ViewPager
+        val pager = findViewById<ViewPager>(R.id.pager)!!
         pager.adapter = null
 
         itemRepository.getFirst().subscribe { itemOpt ->

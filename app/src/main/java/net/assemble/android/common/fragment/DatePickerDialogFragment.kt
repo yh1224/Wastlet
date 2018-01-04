@@ -5,16 +5,10 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.widget.DatePicker
-import com.github.salomonbrys.kodein.instance
-import net.assemble.android.common.util.RxBus
 import java.util.*
-
 
 class DatePickerDialogFragment : BaseDialogFragment()
         , DatePickerDialog.OnDateSetListener {
-    // Instances injected by Kodein
-    private val bus: RxBus by instance()
-
     /** result listener */
     interface OnDatePickerResultListener {
         /**
@@ -32,9 +26,9 @@ class DatePickerDialogFragment : BaseDialogFragment()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val c = Calendar.getInstance()
-        val year = arguments.getInt(ARG_YEAR, c.get(Calendar.YEAR))
-        val month = arguments.getInt(ARG_MONTH, c.get(Calendar.MONTH) + 1)
-        val dayOfMonth = arguments.getInt(ARG_DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH))
+        val year = arguments!!.getInt(ARG_YEAR, c.get(Calendar.YEAR))
+        val month = arguments!!.getInt(ARG_MONTH, c.get(Calendar.MONTH) + 1)
+        val dayOfMonth = arguments!!.getInt(ARG_DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH))
 
         return DatePickerDialog(activity, this, year, month - 1, dayOfMonth)
     }

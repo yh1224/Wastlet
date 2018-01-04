@@ -24,7 +24,7 @@ class ItemEditActivity : BaseActivity() {
 
         setContentView(R.layout.item_edit_activity)
 
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)!!
         setSupportActionBar(toolbar)
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

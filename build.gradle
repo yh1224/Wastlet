@@ -39,13 +39,13 @@ def version_patch = 0
 project.ext {
     packageName = 'net.assemble.android.mywallet'
 
-    compileSdkVersion = 25
+    compileSdkVersion = 26
     minSdkVersion = 19
     targetSdkVersion = compileSdkVersion
 
-    supportLibVersion = "25.4.0"
-    firebaseLibVersion = "11.6.2"
-    playServicesVersion = "11.6.2"
+    supportLibVersion = "27.0.2"
+    firebaseLibVersion = "11.8.0"
+    playServicesVersion = "11.8.0"
 
     versionCode = {
         return version_major * 10000 + version_minor * 100 + version_patch

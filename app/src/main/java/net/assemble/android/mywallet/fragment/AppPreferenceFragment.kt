@@ -20,7 +20,7 @@ class AppPreferenceFragment : BasePreferenceFragment(), SharedPreferences.OnShar
         preferenceManager.sharedPreferencesName = AppPreferences::class.java.simpleName
         addPreferencesFromResource(R.xml.app_preferences)
 
-        val prefs = activity.getSharedPreferences(AppPreferences::class.java.simpleName, Context.MODE_PRIVATE)
+        val prefs = activity!!.getSharedPreferences(AppPreferences::class.java.simpleName, Context.MODE_PRIVATE)
         prefs.registerOnSharedPreferenceChangeListener(this)
 
         initView()

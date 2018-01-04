@@ -44,8 +44,8 @@ class ItemListFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        year = arguments.getInt(ARG_YEAR)
-        month = arguments.getInt(ARG_MONTH)
+        year = arguments!!.getInt(ARG_YEAR)
+        month = arguments!!.getInt(ARG_MONTH)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -13,14 +13,14 @@ class HelpActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.help_activity)
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)!!
         setSupportActionBar(toolbar)
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_white_24dp)
 
-        val webView = findViewById(R.id.webView) as WebView
-        webView.setWebViewClient(WebViewClient())
+        val webView = findViewById<WebView>(R.id.webView)!!
+        webView.webViewClient = WebViewClient()
         webView.loadUrl(URL)
         @SuppressLint("SetJavaScriptEnabled")
         webView.settings.javaScriptEnabled = true
