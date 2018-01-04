@@ -44,7 +44,7 @@ class PackageInfoHelper(private val context: Context) {
     companion object {
         /** 公開用署名フィンガープリント */
         private val APP_SHA1_FINGERPRINTS = listOf(
-                "68:E8:AF:A0:A5:69:E5:F5:82:90:A0:85:EF:94:DD:9D:66:87:57:35"
+                "49:40:CE:F7:5B:47:F6:68:C3:6E:98:65:7B:A5:B8:65:AA:C6:CD:AE"
         )
     }
 }
