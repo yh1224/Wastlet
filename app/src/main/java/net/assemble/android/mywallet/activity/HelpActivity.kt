@@ -32,6 +32,9 @@ class HelpActivity : BaseActivity() {
     }
 
     companion object {
+        @Suppress("unused")
+        private val TAG = HelpActivity::class.java.simpleName
+
         private const val URL = "https://yh1224.gitbooks.io/mywallet/"
     }
 }

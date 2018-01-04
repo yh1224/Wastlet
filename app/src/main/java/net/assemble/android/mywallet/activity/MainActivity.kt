@@ -158,8 +158,8 @@ class MainActivity : BaseActivity()
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_item_help -> {
-                startActivity(Intent(this, HelpActivity::class.java))
+            R.id.menu_item_about -> {
+                startActivity(Intent(this, AboutActivity::class.java))
             }
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)

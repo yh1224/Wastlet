@@ -11,6 +11,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import net.assemble.android.common.util.RxBus
+import net.assemble.android.mywallet.helper.PackageInfoHelper
 import net.assemble.android.mywallet.preferences.AppPreferences
 import net.assemble.android.mywallet.repository.FirestoreRepository
 import net.assemble.android.mywallet.repository.FirestoreRepositoryInterface
@@ -25,6 +26,10 @@ fun applicationModule(application: Application) = Kodein.Module {
     }
 
     bind<RxBus>() with instance(RxBus)
+
+    bind<PackageInfoHelper>() with singleton {
+        PackageInfoHelper(application.applicationContext)
+    }
 
     bind<AppPreferences>() with singleton {
         AppPreferences()

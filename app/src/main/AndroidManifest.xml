@@ -53,6 +53,11 @@
             android:label="@string/help"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.AboutActivity"
+            android:label="@string/about"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- This meta-data tag is required to use Google Play Services. -->
         <meta-data
