@@ -57,12 +57,12 @@ class AboutActivity : BaseActivity() {
         @SuppressLint("SetJavaScriptEnabled")
         webView.settings.javaScriptEnabled = true
 
-        // Feedback
-        val feedbackButton = findViewById<Button>(R.id.support)
-        feedbackButton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.support_url)))
-            startActivity(intent)
-        }
+        // Support
+        //val feedbackButton = findViewById<Button>(R.id.support)
+        //feedbackButton.setOnClickListener {
+        //    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.support_url)))
+        //    startActivity(intent)
+        //}
     }
 
     override fun onSupportNavigateUp(): Boolean {
