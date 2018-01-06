@@ -44,7 +44,9 @@ class ItemRepository(
         return itemsRef()
                 .whereGreaterThanOrEqualTo(WalletItem.KEY_DATE, start.toInstant().toEpochMilli())
                 .whereLessThan(WalletItem.KEY_DATE, end.toInstant().toEpochMilli())
-                .orderBy(WalletItem.KEY_DATE, Query.Direction.ASCENDING).get()
+                .orderBy(WalletItem.KEY_DATE, Query.Direction.ASCENDING)
+                .orderBy(WalletItem.KEY_TIMESTAMP, Query.Direction.ASCENDING)
+                .get()
                 .toSingle()
                 .map { querySnapshot ->
                     querySnapshot.map { documentSnapshot ->
@@ -63,8 +65,9 @@ class ItemRepository(
 
     override fun getFirst(): Single<Option<WalletItem>> =
             itemsRef()
-                    .orderBy(WalletItem.KEY_DATE, Query.Direction.ASCENDING).limit(1)
-                    .get().toSingle()
+                    .orderBy(WalletItem.KEY_DATE, Query.Direction.ASCENDING)
+                    .orderBy(WalletItem.KEY_TIMESTAMP, Query.Direction.ASCENDING)
+                    .limit(1).get().toSingle()
                     .map { documentSnapshot ->
                         if (documentSnapshot.isEmpty) {
                             None

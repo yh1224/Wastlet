@@ -8,6 +8,9 @@ data class WalletItem(
         /** key */
         @Exclude var id: String? = null,
 
+        /** 保存日時 */
+        var timestamp: Long = Calendar.getInstance().timeInMillis,
+
         /** 備考 */
         var note: String = "",
 
@@ -29,6 +32,7 @@ data class WalletItem(
     }
 
     companion object {
+        const val KEY_TIMESTAMP = "timestamp"
         const val KEY_DATE = "date"
     }
 }
