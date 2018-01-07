@@ -4,9 +4,7 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import io.reactivex.Completable
 import io.reactivex.Single
-import net.assemble.android.common.extensions.toCompletable
 import net.assemble.android.common.extensions.toSingle
 import net.assemble.android.common.util.None
 import net.assemble.android.common.util.Option
@@ -24,19 +22,6 @@ class ItemRepository(
         firebaseFirestore: FirebaseFirestore,
         private val bus: RxBus
 ) : AppRepository(firebaseAuth, firebaseFirestore), ItemRepositoryInterface {
-    override fun save(item: WalletItem): Completable =
-            if (item.id != null) {
-                itemsRef().document(item.id!!).set(item).toCompletable()
-                        .doOnComplete {
-                            bus.post(WalletItem.Event.OnUpdated(item))
-                        }
-            } else {
-                itemsRef().add(item).toCompletable()
-                        .doOnComplete {
-                            bus.post(WalletItem.Event.OnAdded(item))
-                        }
-            }
-
     override fun getMonthly(year: Int, month: Int): Single<List<WalletItem>> {
         val start = LocalDateTime.of(year, month, 1, 0, 0, 0, 0).atZone(ZoneId.systemDefault())
         val end = start.plusMonths(1)
@@ -76,9 +61,18 @@ class ItemRepository(
                         }
                     }
 
-    override fun delete(id: String): Completable =
-            itemsRef().document(id).delete().toCompletable()
-                    .doOnComplete {
-                        bus.post(WalletItem.Event.OnDeleted(id))
-                    }
+    override fun save(item: WalletItem) {
+        if (item.id != null) {
+            itemsRef().document(item.id!!).set(item)
+            bus.post(WalletItem.Event.OnUpdated(item))
+        } else {
+            itemsRef().add(item)
+            bus.post(WalletItem.Event.OnAdded(item))
+        }
+    }
+
+    override fun delete(id: String) {
+        itemsRef().document(id).delete()
+        bus.post(WalletItem.Event.OnDeleted(id))
+    }
 }

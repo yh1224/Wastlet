@@ -9,9 +9,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.github.salomonbrys.kodein.instance
 import com.jakewharton.rxbinding2.view.clicks
-import io.reactivex.disposables.CompositeDisposable
-import net.assemble.android.common.extensions.plusAssign
-import net.assemble.android.common.extensions.withViewDisable
 import net.assemble.android.common.fragment.BaseFragment
 import net.assemble.android.common.fragment.DatePickerDialogFragment
 import net.assemble.android.common.util.RxBus
@@ -29,9 +26,6 @@ class ItemEditFragment : BaseFragment()
     private val inputMethodManager: InputMethodManager by instance()
     private val itemRepository: ItemRepositoryInterface by instance()
     private val bus: RxBus by instance()
-
-    /** Disposable container for RxJava */
-    private val disposables = CompositeDisposable()
 
     // Bindings
     private lateinit var binding: ItemEditFragmentBinding
@@ -108,12 +102,9 @@ class ItemEditFragment : BaseFragment()
             R.id.menu_item_delete -> {
                 confirmSnackbar = Snackbar.make(view!!, R.string.delete_confirm, Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.delete, {
-                            disposables += itemRepository.delete(form.id!!)
-                                    .withViewDisable(binding.ok)
-                                    .subscribe {
-                                        Toast.makeText(activity, R.string.deleted, Toast.LENGTH_SHORT).show()
-                                        finish()
-                                    }
+                            itemRepository.delete(form.id!!)
+                            Toast.makeText(activity, R.string.deleted, Toast.LENGTH_SHORT).show()
+                            finish()
                         })
                 confirmSnackbar?.show()
                 return true
@@ -143,10 +134,7 @@ class ItemEditFragment : BaseFragment()
             date = SimpleDateFormat("yyyy/MM/dd", Locale.US).parse(form.date.get()).time
         }
         itemRepository.save(itemInfo)
-                .withViewDisable(binding.ok)
-                .subscribe {
-                    finish()
-                }
+        finish()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -160,12 +148,6 @@ class ItemEditFragment : BaseFragment()
 
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, InputMethodManager.HIDE_IMPLICIT_ONLY)
         confirmSnackbar?.dismiss()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        disposables.dispose()
     }
 
     /**

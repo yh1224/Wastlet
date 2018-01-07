@@ -1,18 +1,10 @@
 package net.assemble.android.mywallet.repository
 
-import io.reactivex.Completable
 import io.reactivex.Single
 import net.assemble.android.common.util.Option
 import net.assemble.android.mywallet.entity.WalletItem
 
 interface ItemRepositoryInterface {
-    /**
-     * アイテムを保存
-     *
-     * @param item アイテム
-     */
-    fun save(item: WalletItem): Completable
-
     /**
      * 指定月のアイテムを取得
      *
@@ -34,9 +26,16 @@ interface ItemRepositoryInterface {
     fun getFirst(): Single<Option<WalletItem>>
 
     /**
+     * アイテムを保存
+     *
+     * @param item アイテム
+     */
+    fun save(item: WalletItem)
+
+    /**
      * アイテムを削除
      *
      * @param id アイテムID
      */
-    fun delete(id: String): Completable
+    fun delete(id: String)
 }
