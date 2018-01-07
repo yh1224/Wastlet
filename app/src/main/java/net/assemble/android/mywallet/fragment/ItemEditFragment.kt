@@ -127,9 +127,18 @@ class ItemEditFragment : BaseFragment()
     }
 
     private fun onOkClicked() {
+        // Validate fee
+        val feeNum = try {
+            form.fee.get().toInt()
+        } catch (e: NumberFormatException) {
+            binding.itemFeeEdit.error = getString(R.string.error_fee_invalid)
+            binding.itemFeeEdit.requestFocus()
+            return
+        }
+
         val itemInfo = WalletItem().apply {
             id = form.id
-            fee = form.fee.get().toInt() // TODO: validate
+            fee = feeNum
             note = form.note.get()
             date = SimpleDateFormat("yyyy/MM/dd", Locale.US).parse(form.date.get()).time
         }

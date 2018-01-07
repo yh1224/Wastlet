@@ -14,4 +14,5 @@
     <string name="deleted">削除しました。</string>
     <string name="help">ヘルプ</string>
     <string name="about">バージョン情報</string>
+    <string name="error_fee_invalid">金額を正しく入力してください。</string>
 </resources>

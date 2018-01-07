@@ -20,4 +20,5 @@
     <string name="deleted">Deleted.</string>
     <string name="help">Help</string>
     <string name="about">About</string>
+    <string name="error_fee_invalid">Input correct digit.</string>
 </resources>
