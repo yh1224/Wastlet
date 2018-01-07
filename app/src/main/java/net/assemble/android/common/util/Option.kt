@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package net.assemble.android.common.util
 
 /**
@@ -17,10 +19,6 @@ sealed class Option<out T>(private val value: T?) {
     }
 
     fun get() = value!!
-
-    fun <T> getOrElse(default: T) = value ?: default
-
-    fun <T> getOrElse(f: () -> T) = value ?: f()
 
     fun getOrNull() = value
 
