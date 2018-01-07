@@ -19,12 +19,10 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField 'boolean', 'PERSISTENCE_ENABLED', 'false'
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
         }
         release {
-            buildConfigField 'boolean', 'PERSISTENCE_ENABLED', 'true'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
