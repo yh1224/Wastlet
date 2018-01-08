@@ -15,4 +15,9 @@
     <string name="help">ヘルプ</string>
     <string name="about">バージョン情報</string>
     <string name="error_fee_invalid">金額を正しく入力してください。</string>
+    <string name="account">アカウント</string>
+    <string name="login">ログイン</string>
+    <string name="logout">ログアウト</string>
+    <string name="sign_in_google">Google アカウントでログイン</string>
+    <string name="sign_in_description">サービスを提供するために個人情報を収集し、プライバシーポリシーに基づき適切に管理いたします。</string>
 </resources>

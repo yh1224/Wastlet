@@ -2,7 +2,9 @@ package net.assemble.android.mywallet.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.widget.Button
 import com.github.salomonbrys.kodein.instance
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -19,15 +21,20 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setContentView(R.layout.login_activity)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)!!
+        setSupportActionBar(toolbar)
+
         firebaseAuth.addAuthStateListener {
-            Log.d(TAG, "addAuthStateListener: $firebaseAuth")
             if (firebaseAuth.currentUser != null) {
                 setResult(RESULT_OK)
                 finish()
             }
         }
 
-        requestSignInByGoogle()
+        findViewById<Button>(R.id.sign_in_google).setOnClickListener {
+            requestSignInByGoogle()
+        }
     }
 
     /**

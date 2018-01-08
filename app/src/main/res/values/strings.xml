@@ -21,4 +21,9 @@
     <string name="help">Help</string>
     <string name="about">About</string>
     <string name="error_fee_invalid">Input correct digit.</string>
+    <string name="account">Account</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="sign_in_google">Sign-in by Google Account</string>
+    <string name="sign_in_description">We collect personal information in order to provide the service and manage it appropriately according to the privacy policy.</string>
 </resources>

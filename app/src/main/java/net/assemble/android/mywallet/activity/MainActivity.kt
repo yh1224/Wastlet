@@ -93,11 +93,7 @@ class MainActivity : BaseActivity()
                     }
                 }
 
-        if (firebaseAuth.currentUser == null) {
-            startActivityForResult(Intent(this, LoginActivity::class.java), REQUEST_LOGIN)
-        } else {
-            initView()
-        }
+        initView()
     }
 
     /**
@@ -108,6 +104,12 @@ class MainActivity : BaseActivity()
     private fun initView(itemInfo: WalletItem? = null) {
         val pager = findViewById<ViewPager>(R.id.pager)!!
         pager.adapter = null
+
+        // 未ログイン時はログイン
+        if (firebaseAuth.currentUser == null) {
+            startActivityForResult(Intent(this, LoginActivity::class.java), REQUEST_LOGIN)
+            return
+        }
 
         itemRepository.getFirst().subscribe { itemOpt ->
             // 先頭から現在の月まで
@@ -158,12 +160,21 @@ class MainActivity : BaseActivity()
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.menu_item_settings -> {
+                startActivity(Intent(this, AppPreferenceActivity::class.java))
+            }
             R.id.menu_item_about -> {
                 startActivity(Intent(this, AboutActivity::class.java))
             }
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        initView()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
