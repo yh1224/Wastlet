@@ -93,6 +93,10 @@ dependencies {
         transitive = true
     }
 
+    // Timber
+    // https://github.com/JakeWharton/timber
+    implementation 'com.jakewharton.timber:timber:4.6.0'
+
     // Firebase
     // https://firebase.google.com
     implementation "com.google.firebase:firebase-core:${rootProject.ext.firebaseLibVersion}"

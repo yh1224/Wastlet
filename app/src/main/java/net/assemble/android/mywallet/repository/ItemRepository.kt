@@ -25,7 +25,6 @@ class ItemRepository(
     override fun getMonthly(year: Int, month: Int): Single<List<WalletItem>> {
         val start = LocalDateTime.of(year, month, 1, 0, 0, 0, 0).atZone(ZoneId.systemDefault())
         val end = start.plusMonths(1)
-        Log.d("ItemRepo", "start=$start(${start.toInstant().toEpochMilli()}), end=$end(${end.toInstant().toEpochMilli()})")
         return itemsRef()
                 .whereGreaterThanOrEqualTo(WalletItem.KEY_DATE, start.toInstant().toEpochMilli())
                 .whereLessThan(WalletItem.KEY_DATE, end.toInstant().toEpochMilli())

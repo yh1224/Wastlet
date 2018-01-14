@@ -3,7 +3,6 @@ package net.assemble.android.mywallet.activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.widget.Button
 import com.github.salomonbrys.kodein.instance
 import com.google.android.gms.auth.api.Auth
@@ -13,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import net.assemble.android.common.activity.BaseActivity
 import net.assemble.android.mywallet.R
+import timber.log.Timber
 
 class LoginActivity : BaseActivity() {
     // Instances injected by Kodein
@@ -44,7 +44,7 @@ class LoginActivity : BaseActivity() {
         // Initialize Google API Client
         val googleApiClient = GoogleApiClient.Builder(this)
                 .enableAutoManage(this) { connectionResult ->
-                    Log.w(TAG, "Google Play Services error: " + connectionResult.errorMessage)
+                    Timber.w("Google Play Services error: " + connectionResult.errorMessage)
                 }
                 .addApi(Auth.GOOGLE_SIGN_IN_API,
                         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

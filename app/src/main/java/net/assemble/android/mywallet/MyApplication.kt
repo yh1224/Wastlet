@@ -13,6 +13,7 @@ import io.fabric.sdk.android.Fabric
 import net.assemble.android.common.BaseApplication
 import net.assemble.android.common.preferences.Preferences
 import net.assemble.android.mywallet.di.applicationModule
+import timber.log.Timber
 
 class MyApplication : BaseApplication() {
     override val kodein: Kodein by Kodein.lazy {
@@ -21,6 +22,11 @@ class MyApplication : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
+
+        // Enable Timber (for debug build only)
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
 
         // Enable Crashlytics (for release build only)
         val core = CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()
