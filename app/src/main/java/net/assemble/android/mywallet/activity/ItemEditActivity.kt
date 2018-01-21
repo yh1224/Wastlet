@@ -9,8 +9,8 @@ import net.assemble.android.common.activity.BaseActivity
 import net.assemble.android.common.extensions.plusAssign
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
-import net.assemble.android.mywallet.fragment.ItemEditFragment
 import net.assemble.android.mywallet.entity.WalletItem
+import net.assemble.android.mywallet.fragment.ItemEditFragment
 
 class ItemEditActivity : BaseActivity() {
     // Instances injected by Kodein
@@ -22,7 +22,7 @@ class ItemEditActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.item_edit_activity)
+        setContentView(R.layout.activity_item_edit)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)!!
         setSupportActionBar(toolbar)

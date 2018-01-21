@@ -73,7 +73,7 @@ class AboutActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.about_activity)
+        setContentView(R.layout.activity_about)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)!!
         setSupportActionBar(toolbar)
         supportActionBar?.setHomeButtonEnabled(true)

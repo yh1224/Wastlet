@@ -16,7 +16,7 @@ import net.assemble.android.common.extensions.with
 import net.assemble.android.common.fragment.BaseFragment
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
-import net.assemble.android.mywallet.databinding.ItemListFragmentBinding
+import net.assemble.android.mywallet.databinding.FragmentItemListBinding
 import net.assemble.android.mywallet.repository.ItemRepositoryInterface
 import net.assemble.android.mywallet.widget.WalletItemAdapter
 import java.text.NumberFormat
@@ -27,7 +27,7 @@ class ItemListFragment : BaseFragment() {
     private val bus: RxBus by instance()
 
     // Bindings
-    private lateinit var binding: ItemListFragmentBinding
+    private lateinit var binding: FragmentItemListBinding
 
     /** Disposable container for RxJava */
     private lateinit var disposables: CompositeDisposable
@@ -57,7 +57,7 @@ class ItemListFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.item_list_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_item_list, container, false)
 
         // レイアウト内の RecyclerView を取得
         with(binding.recyclerView) {

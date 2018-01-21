@@ -13,7 +13,7 @@ import net.assemble.android.common.fragment.BaseFragment
 import net.assemble.android.common.fragment.DatePickerDialogFragment
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
-import net.assemble.android.mywallet.databinding.ItemEditFragmentBinding
+import net.assemble.android.mywallet.databinding.FragmentItemEditBinding
 import net.assemble.android.mywallet.entity.WalletItem
 import net.assemble.android.mywallet.repository.ItemRepositoryInterface
 import java.io.Serializable
@@ -28,7 +28,7 @@ class ItemEditFragment : BaseFragment()
     private val bus: RxBus by instance()
 
     // Bindings
-    private lateinit var binding: ItemEditFragmentBinding
+    private lateinit var binding: FragmentItemEditBinding
     private lateinit var form: ItemEditForm
 
     data class ItemEditForm(
@@ -61,7 +61,7 @@ class ItemEditFragment : BaseFragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.item_edit_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_item_edit, container, false)
         binding.form = form
 
         // 金額にフォーカス、全選択、IME ON

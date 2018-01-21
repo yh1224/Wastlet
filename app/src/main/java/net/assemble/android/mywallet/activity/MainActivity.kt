@@ -21,7 +21,7 @@ import net.assemble.android.common.activity.BaseActivity
 import net.assemble.android.common.extensions.plusAssign
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
-import net.assemble.android.mywallet.databinding.MainActivityBinding
+import net.assemble.android.mywallet.databinding.ActivityMainBinding
 import net.assemble.android.mywallet.entity.WalletItem
 import net.assemble.android.mywallet.fragment.ItemListFragment
 import net.assemble.android.mywallet.repository.ItemRepositoryInterface
@@ -39,7 +39,7 @@ class MainActivity : BaseActivity()
     private val itemRepository: ItemRepositoryInterface by instance()
 
     // Bindings
-    private lateinit var binding: MainActivityBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var drawerToggle: ActionBarDrawerToggle
 
     /** Disposable container for RxJava */
@@ -64,7 +64,7 @@ class MainActivity : BaseActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setHomeButtonEnabled(true)
