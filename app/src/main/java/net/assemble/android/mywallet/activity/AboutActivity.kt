@@ -22,6 +22,7 @@ import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
 import net.assemble.android.mywallet.helper.PackageInfoHelper
 import org.yaml.snakeyaml.Yaml
+import java.io.FileNotFoundException
 
 class AboutActivity : BaseActivity() {
     // Instances injected by Kodein
@@ -94,8 +95,12 @@ class AboutActivity : BaseActivity() {
 
             // Read licenses from Yaml
             disposables += Single.fromCallable {
-                Yaml().load<List<Map<String, Any>>>(assets.open(LICENSES_YAML))
-                        .filter { (it["skip"] as Boolean?) != true }
+                try {
+                    Yaml().load<List<Map<String, Any>>>(assets.open(LICENSES_YAML))
+                            .filter { (it["skip"] as Boolean?) != true }
+                } catch (e: FileNotFoundException) {
+                    listOf<Map<String, Any>>()
+                }
             }
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

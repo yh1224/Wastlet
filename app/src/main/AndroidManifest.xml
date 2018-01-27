@@ -26,12 +26,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="@string/login"
             android:name=".activity.LoginActivity"
+            android:label="@string/login"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.ItemEditActivity"
             android:launchMode="singleTop"
@@ -54,11 +53,13 @@
         <activity
             android:name=".activity.HelpActivity"
             android:label="@string/help"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.AboutActivity"
             android:label="@string/about"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
