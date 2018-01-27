@@ -26,4 +26,6 @@
     <string name="logout">Logout</string>
     <string name="sign_in_google">Sign-in by Google Account</string>
     <string name="sign_in_description">We collect personal information in order to provide the service and manage it appropriately according to the privacy policy.</string>
+    <string name="error_login_failed">Login failed.\n%s</string>
+    <string name="welcome_user">Welcome, %s</string>
 </resources>

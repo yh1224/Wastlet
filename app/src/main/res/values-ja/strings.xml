@@ -20,4 +20,6 @@
     <string name="logout">ログアウト</string>
     <string name="sign_in_google">Google アカウントでログイン</string>
     <string name="sign_in_description">サービスを提供するために個人情報を収集し、プライバシーポリシーに基づき適切に管理いたします。</string>
+    <string name="error_login_failed">ログインできませんでした。\n%s</string>
+    <string name="welcome_user">ようこそ、%s さん</string>
 </resources>

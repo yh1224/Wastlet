@@ -45,6 +45,13 @@ class MainActivity : BaseActivity()
     /** Disposable container for RxJava */
     private val disposables = CompositeDisposable()
 
+    /** Firebase AuthStateListener */
+    private val authStateListener = FirebaseAuth.AuthStateListener {
+        if (firebaseAuth.currentUser == null) {
+            initView()
+        }
+    }
+
     /**
      * ViewPager に月毎のリストを表示するフラグメントを渡すアダプタ
      */
@@ -92,8 +99,6 @@ class MainActivity : BaseActivity()
                         is WalletItemAdapter.OnItemClickEvent -> startEditActivity(event.itemInfo)
                     }
                 }
-
-        initView()
     }
 
     /**
@@ -105,7 +110,7 @@ class MainActivity : BaseActivity()
         val pager = findViewById<ViewPager>(R.id.pager)!!
         pager.adapter = null
 
-        // 未ログイン時はログイン
+        // 未ログイン時はログイン画面へ
         if (firebaseAuth.currentUser == null) {
             startActivityForResult(Intent(this, LoginActivity::class.java), REQUEST_LOGIN)
             return
@@ -114,7 +119,8 @@ class MainActivity : BaseActivity()
         itemRepository.getFirst().subscribe { itemOpt ->
             // 先頭から現在の月まで
             val monthList = mutableListOf<String>()
-            val startMilli = itemOpt.map { it.date }.getOrNull() ?: Calendar.getInstance().timeInMillis
+            val startMilli = itemOpt.map { it.date }.getOrNull()
+                    ?: Calendar.getInstance().timeInMillis
             val startDate = Instant.ofEpochMilli(startMilli).atZone(ZoneId.systemDefault()).toLocalDate().withDayOfMonth(1)
             val endDate = Instant.now().atZone(ZoneId.systemDefault()).toLocalDate()
             var d = startDate
@@ -174,6 +180,8 @@ class MainActivity : BaseActivity()
     override fun onResume() {
         super.onResume()
 
+        firebaseAuth.addAuthStateListener(authStateListener)
+
         initView()
     }
 
@@ -185,6 +193,12 @@ class MainActivity : BaseActivity()
                 finish()
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        firebaseAuth.removeAuthStateListener(authStateListener)
     }
 
     override fun onDestroy() {
