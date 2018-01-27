@@ -31,7 +31,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/itemFee"
             app:layout_constraintTop_toBottomOf="@+id/itemDate"
             tools:text="Title" />
 
@@ -44,6 +44,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
+            android:gravity="end"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
