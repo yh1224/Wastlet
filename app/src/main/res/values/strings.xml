@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Wastlet</string>
     <string name="support">Support</string>
-    <string name="support_url" translatable="false">http://assemble.net</string>
-    <string name="version" translatable="false">Version %s\nCopyright 2018 Yoshiharu Hirose</string>
+    <string name="support_url" translatable="false">https://lab.assemble.net</string>
+    <string name="version" translatable="false">Version %s\nCopyright 2018 lab.assemble</string>
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="drawer_open" translatable="false">Open navigation drawer</string>
     <string name="drawer_close" translatable="false">Close navigation drawer</string>
