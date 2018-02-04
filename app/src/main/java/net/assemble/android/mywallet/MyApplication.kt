@@ -11,7 +11,6 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.jakewharton.threetenabp.AndroidThreeTen
 import io.fabric.sdk.android.Fabric
 import net.assemble.android.common.BaseApplication
-import net.assemble.android.common.preferences.Preferences
 import net.assemble.android.mywallet.di.applicationModule
 import timber.log.Timber
 
@@ -41,9 +40,6 @@ class MyApplication : BaseApplication() {
                 FirebaseFirestoreSettings.Builder()
                         .setPersistenceEnabled(true)
                         .build()
-
-        // Initialize Preferences
-        Preferences.init(applicationContext)
 
         // Initialize AdMob
         MobileAds.initialize(this, ADMOB_APP_ID)

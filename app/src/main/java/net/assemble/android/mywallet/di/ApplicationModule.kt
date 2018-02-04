@@ -32,7 +32,7 @@ fun applicationModule(application: Application) = Kodein.Module {
     }
 
     bind<AppPreferences>() with singleton {
-        AppPreferences()
+        AppPreferences(application.applicationContext)
     }
 
     bind<FirebaseAnalytics>() with singleton {

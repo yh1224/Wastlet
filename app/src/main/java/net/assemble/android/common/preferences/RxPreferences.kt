@@ -1,12 +1,13 @@
 package net.assemble.android.common.preferences
 
+import android.content.Context
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.disposables.Disposables
 import io.reactivex.observables.ConnectableObservable
 import kotlin.reflect.KProperty
 
-abstract class RxPreferences : Preferences() {
+abstract class RxPreferences(context: Context) : Preferences(context) {
     /**
      * Preferences が変更するたびに取得
      */
