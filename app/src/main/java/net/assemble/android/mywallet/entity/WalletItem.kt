@@ -1,9 +1,11 @@
 package net.assemble.android.mywallet.entity
 
+import android.support.annotation.Keep
 import com.google.firebase.firestore.Exclude
 import java.io.Serializable
 import java.util.*
 
+@Keep
 data class WalletItem(
         /** key */
         @Exclude var id: String? = null,
