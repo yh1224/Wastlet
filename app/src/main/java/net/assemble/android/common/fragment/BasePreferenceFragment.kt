@@ -5,12 +5,9 @@ import android.support.v7.preference.PreferenceFragmentCompat
 import com.github.salomonbrys.kodein.KodeinInjected
 import com.github.salomonbrys.kodein.KodeinInjector
 import com.github.salomonbrys.kodein.android.SupportFragmentInjector
-import com.github.yamamotoj.pikkel.Pikkel
-import com.github.yamamotoj.pikkel.PikkelDelegate
 
 abstract class BasePreferenceFragment : PreferenceFragmentCompat()
-        , SupportFragmentInjector, KodeinInjected
-        , Pikkel by PikkelDelegate() {
+        , SupportFragmentInjector, KodeinInjected {
     override val injector: KodeinInjector = KodeinInjector()
 
     //override fun provideOverridingModule() = Kodein.Module {
