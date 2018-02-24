@@ -61,9 +61,6 @@ class AppPreferenceFragment : BasePreferenceFragment(), SharedPreferences.OnShar
     }
 
     companion object {
-        @Suppress("unused")
-        private val TAG = AppPreferenceFragment::class.java.simpleName
-
         fun newInstance(): AppPreferenceFragment = AppPreferenceFragment()
     }
 }

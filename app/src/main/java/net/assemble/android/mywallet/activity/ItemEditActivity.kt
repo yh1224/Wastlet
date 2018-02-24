@@ -55,9 +55,6 @@ class ItemEditActivity : BaseActivity() {
     }
 
     companion object {
-        @Suppress("unused")
-        private val TAG = ItemEditActivity::class.java.simpleName
-
         const val EXTRA_ITEM_INFO = "itemInfo"
     }
 }

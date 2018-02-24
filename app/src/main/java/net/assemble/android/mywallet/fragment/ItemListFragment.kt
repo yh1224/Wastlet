@@ -111,9 +111,6 @@ class ItemListFragment : BaseFragment() {
     }
 
     companion object {
-        @Suppress("unused")
-        private val TAG = ItemListFragment::class.java.simpleName
-
         private const val ARG_YEAR = "year"
         private const val ARG_MONTH = "month"
 

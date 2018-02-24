@@ -189,9 +189,6 @@ class ItemEditFragment : BaseFragment()
     }
 
     companion object {
-        @Suppress("unused")
-        private val TAG = ItemEditFragment::class.java.simpleName
-
         private const val ARG_ITEM_INFO = "ITEM_INFO"
 
         fun newInstance(itemInfo: WalletItem = WalletItem()): ItemEditFragment =

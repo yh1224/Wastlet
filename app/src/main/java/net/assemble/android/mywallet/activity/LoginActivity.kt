@@ -126,9 +126,6 @@ class LoginActivity : BaseActivity() {
     }
 
     companion object {
-        @Suppress("unused")
-        private val TAG = LoginActivity::class.java.simpleName
-
         private const val REQUEST_SIGN_IN_GOOGLE = 1
 
         private const val ALERT_DIALOG_TAG = "alert"

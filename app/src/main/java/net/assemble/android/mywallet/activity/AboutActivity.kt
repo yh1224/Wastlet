@@ -140,9 +140,6 @@ class AboutActivity : BaseActivity() {
     }
 
     companion object {
-        @Suppress("unused")
-        private val TAG = AboutActivity::class.java.simpleName
-
         private const val LICENSES_YAML = "licenses.yml"
     }
 }

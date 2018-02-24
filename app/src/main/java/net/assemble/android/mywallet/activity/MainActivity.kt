@@ -219,9 +219,6 @@ class MainActivity : BaseActivity()
     }
 
     companion object {
-        @Suppress("unused")
-        private val TAG = MainActivity::class.java.simpleName
-
         private const val REQUEST_LOGIN = 1
 
         private const val MONTH_FORMAT = "yyyy/MM"

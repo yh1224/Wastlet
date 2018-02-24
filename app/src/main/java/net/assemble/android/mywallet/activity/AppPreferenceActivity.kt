@@ -52,9 +52,4 @@ class AppPreferenceActivity : BaseActivity() {
 
         disposables.dispose()
     }
-
-    companion object {
-        @Suppress("unused")
-        private val TAG = AppPreferenceActivity::class.java.simpleName
-    }
 }
