@@ -1,5 +1,7 @@
 package net.assemble.android.mywallet.fragment
 
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.databinding.ObservableField
 import android.os.Bundle
@@ -9,9 +11,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.github.salomonbrys.kodein.instance
 import com.jakewharton.rxbinding2.view.clicks
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import net.assemble.android.common.fragment.BaseFragment
 import net.assemble.android.common.fragment.DatePickerDialogFragment
 import net.assemble.android.common.util.RxBus
+import net.assemble.android.common.viewmodel.BundleAwareViewModelFactory
+import net.assemble.android.common.viewmodel.ParcelableViewModel
 import net.assemble.android.mywallet.R
 import net.assemble.android.mywallet.databinding.FragmentItemEditBinding
 import net.assemble.android.mywallet.entity.WalletItem
@@ -29,14 +35,33 @@ class ItemEditFragment : BaseFragment()
 
     // Bindings
     private lateinit var binding: FragmentItemEditBinding
-    private lateinit var form: ItemEditForm
+    private lateinit var viewModel: ItemEditViewModel
 
-    data class ItemEditForm(
-            val id: String?,
-            val fee: ObservableField<String> = ObservableField(""),
-            val note: ObservableField<String> = ObservableField(""),
-            val date: ObservableField<String> = ObservableField("")
-    ) : Serializable
+    /** Disposable container for RxJava */
+    private val disposables = CompositeDisposable()
+
+    class ItemEditViewModel : ParcelableViewModel(), Serializable {
+        var id: String? = null
+        val fee: ObservableField<String> = ObservableField("")
+        val note: ObservableField<String> = ObservableField("")
+        val date: ObservableField<String> = ObservableField("")
+
+        override fun readFrom(bundle: Bundle) {
+            val oldViewModel = bundle.getSerializable(ARG_VIEW_MODEL) as ItemEditViewModel
+            id = oldViewModel.id
+            fee.set(oldViewModel.fee.get())
+            note.set(oldViewModel.note.get())
+            date.set(oldViewModel.date.get())
+        }
+
+        override fun writeTo(bundle: Bundle) {
+            bundle.putSerializable(ARG_VIEW_MODEL, this)
+        }
+
+        companion object {
+            const val ARG_VIEW_MODEL = "fee"
+        }
+    }
 
     /** 確認メッセージ */
     private var confirmSnackbar: Snackbar? = null
@@ -47,14 +72,20 @@ class ItemEditFragment : BaseFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        form = if (savedInstanceState != null) {
-            savedInstanceState.getSerializable(ARG_ITEM_INFO) as ItemEditForm
-        } else {
-            val itemInfo = (arguments!!.getSerializable(ARG_ITEM_INFO) as WalletItem).copy()
-            ItemEditForm(itemInfo.id).apply {
-                fee.set(itemInfo.fee.toString())
-                note.set(itemInfo.note)
-                date.set(SimpleDateFormat("yyyy/MM/dd", Locale.US).format(itemInfo.date))
+        // Create or restore viewModel
+        viewModel = ViewModelProviders
+                .of(activity!!, BundleAwareViewModelFactory(savedInstanceState, ViewModelProvider.NewInstanceFactory()))
+                .get(ItemEditViewModel::class.java)
+
+        // Set initial value
+        if (savedInstanceState == null) {
+            (arguments?.getSerializable(ARG_ITEM_INFO) as WalletItem?)?.let { itemInfo ->
+                viewModel.apply {
+                    id = itemInfo.id
+                    fee.set(itemInfo.fee.toString())
+                    note.set(itemInfo.note)
+                    date.set(SimpleDateFormat("yyyy/MM/dd", Locale.US).format(itemInfo.date))
+                }
             }
         }
     }
@@ -62,7 +93,7 @@ class ItemEditFragment : BaseFragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_item_edit, container, false)
-        binding.form = form
+        binding.viewModel = viewModel
 
         // 金額にフォーカス、全選択、IME ON
         binding.executePendingBindings()
@@ -72,27 +103,27 @@ class ItemEditFragment : BaseFragment()
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY)
 
         binding.itemDate.clicks().subscribe {
-            val d = form.date.get().split("/")
+            val d = viewModel.date.get().split("/")
             DatePickerDialogFragment.newInstance(d[0].toInt(), d[1].toInt(), d[2].toInt()).show(childFragmentManager, DatePickerDialogFragment::class.java.simpleName)
-        }
+        }.addTo(disposables)
 
         binding.ok.clicks().subscribe {
             onOkClicked()
-        }
+        }.addTo(disposables)
 
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (form.id != null) {
+        if (viewModel.id != null) {
             setHasOptionsMenu(true)
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        if (form.id != null) {
+        if (viewModel.id != null) {
             inflater.inflate(R.menu.menu_item_edit, menu)
         }
     }
@@ -102,7 +133,7 @@ class ItemEditFragment : BaseFragment()
             R.id.menu_item_delete -> {
                 confirmSnackbar = Snackbar.make(view!!, R.string.delete_confirm, Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.delete, {
-                            itemRepository.delete(form.id!!)
+                            itemRepository.delete(viewModel.id!!)
                             Toast.makeText(activity, R.string.deleted, Toast.LENGTH_SHORT).show()
                             finish()
                         })
@@ -114,13 +145,13 @@ class ItemEditFragment : BaseFragment()
     }
 
     override fun onDatePicked(year: Int, month: Int, dayOfMonth: Int) {
-        form.date.set("%04d/%02d/%02d".format(year, month, dayOfMonth))
+        viewModel.date.set("%04d/%02d/%02d".format(year, month, dayOfMonth))
     }
 
     private fun onOkClicked() {
         // Validate fee
         val feeNum = try {
-            form.fee.get().toInt()
+            viewModel.fee.get().toInt()
         } catch (e: NumberFormatException) {
             binding.itemFeeEdit.error = getString(R.string.error_fee_invalid)
             binding.itemFeeEdit.requestFocus()
@@ -128,10 +159,10 @@ class ItemEditFragment : BaseFragment()
         }
 
         val itemInfo = WalletItem().apply {
-            id = form.id
+            id = viewModel.id
             fee = feeNum
-            note = form.note.get()
-            date = SimpleDateFormat("yyyy/MM/dd", Locale.US).parse(form.date.get()).time
+            note = viewModel.note.get()
+            date = SimpleDateFormat("yyyy/MM/dd", Locale.US).parse(viewModel.date.get()).time
         }
         itemRepository.save(itemInfo)
         finish()
@@ -140,7 +171,7 @@ class ItemEditFragment : BaseFragment()
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putSerializable(ARG_ITEM_INFO, form)
+        viewModel.writeTo(outState)
     }
 
     override fun onPause() {

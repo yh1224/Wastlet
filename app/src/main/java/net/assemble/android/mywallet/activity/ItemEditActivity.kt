@@ -41,15 +41,17 @@ class ItemEditActivity : BaseActivity() {
                     }
                 }
 
-        val itemInfo = intent.getSerializableExtra(EXTRA_ITEM_INFO) as WalletItem?
-        val itemEditFragment = if (itemInfo != null) {
-            ItemEditFragment.newInstance(itemInfo) // 編集
-        } else {
-            ItemEditFragment.newInstance() // 新規
+        if (supportFragmentManager.findFragmentByTag(ItemEditFragment::class.java.simpleName) == null) {
+            val itemInfo = intent.getSerializableExtra(EXTRA_ITEM_INFO) as WalletItem?
+            val itemEditFragment = if (itemInfo != null) {
+                ItemEditFragment.newInstance(itemInfo) // 編集
+            } else {
+                ItemEditFragment.newInstance() // 新規
+            }
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.content, itemEditFragment, ItemEditFragment::class.java.simpleName)
+                    .commit()
         }
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.content, itemEditFragment)
-                .commit()
     }
 
     companion object {

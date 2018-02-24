@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="form"
-            type="net.assemble.android.mywallet.fragment.ItemEditFragment.ItemEditForm" />
+            name="viewModel"
+            type="net.assemble.android.mywallet.fragment.ItemEditFragment.ItemEditViewModel" />
     </data>
 
     <LinearLayout
@@ -42,7 +42,7 @@
                         android:maxLines="1"
                         android:selectAllOnFocus="true"
                         android:singleLine="true"
-                        android:text="@={form.fee}" />
+                        android:text="@={viewModel.fee}" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -59,7 +59,7 @@
                         android:hint="@string/note"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="@={form.note}" />
+                        android:text="@={viewModel.note}" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -79,7 +79,7 @@
                         android:inputType="none"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="@={form.date}"
+                        android:text="@={viewModel.date}"
                         android:textIsSelectable="false"
                         tools:ignore="TextFields" />
                 </android.support.design.widget.TextInputLayout>
