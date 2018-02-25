@@ -162,8 +162,8 @@ class ItemEditFragment : BaseFragment()
             return
         }
 
-        val itemInfo = WalletItem().apply {
-            id = viewModel.id
+        val itemInfo = ((arguments?.getSerializable(ARG_ITEM_INFO) as WalletItem?)
+                ?: WalletItem()).apply {
             fee = feeNum
             note = viewModel.note.get()
             date = SimpleDateFormat("yyyy/MM/dd", Locale.US).parse(viewModel.date.get()).time
