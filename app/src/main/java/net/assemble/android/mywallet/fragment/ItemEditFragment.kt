@@ -13,6 +13,7 @@ import com.github.salomonbrys.kodein.instance
 import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import net.assemble.android.common.filter.CurrencyFormatInputFilter
 import net.assemble.android.common.fragment.BaseFragment
 import net.assemble.android.common.fragment.DatePickerDialogFragment
 import net.assemble.android.common.util.RxBus
@@ -31,6 +32,7 @@ class ItemEditFragment : BaseFragment()
     // Instances injected by Kodein
     private val inputMethodManager: InputMethodManager by instance()
     private val itemRepository: ItemRepositoryInterface by instance()
+    private val currencyFormatInputFilter: CurrencyFormatInputFilter by instance()
     private val bus: RxBus by instance()
 
     // Bindings
@@ -82,7 +84,7 @@ class ItemEditFragment : BaseFragment()
             (arguments?.getSerializable(ARG_ITEM_INFO) as WalletItem?)?.let { itemInfo ->
                 viewModel.apply {
                     id = itemInfo.id
-                    fee.set(itemInfo.fee.toString())
+                    fee.set(currencyFormatInputFilter.format(itemInfo.fee))
                     note.set(itemInfo.note)
                     date.set(SimpleDateFormat("yyyy/MM/dd", Locale.US).format(itemInfo.date))
                 }
@@ -101,6 +103,8 @@ class ItemEditFragment : BaseFragment()
         binding.itemFeeEdit.selectAll()
         inputMethodManager.hideSoftInputFromWindow(binding.itemFeeEdit.windowToken, 0)
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY)
+
+        binding.itemFeeEdit.filters = arrayOf(currencyFormatInputFilter)
 
         binding.itemDate.clicks().subscribe {
             val d = viewModel.date.get().split("/")
@@ -151,7 +155,7 @@ class ItemEditFragment : BaseFragment()
     private fun onOkClicked() {
         // Validate fee
         val feeNum = try {
-            viewModel.fee.get().toInt()
+            currencyFormatInputFilter.parse(viewModel.fee.get())
         } catch (e: NumberFormatException) {
             binding.itemFeeEdit.error = getString(R.string.error_fee_invalid)
             binding.itemFeeEdit.requestFocus()

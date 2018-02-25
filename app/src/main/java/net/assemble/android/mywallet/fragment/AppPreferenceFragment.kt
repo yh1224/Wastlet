@@ -43,7 +43,7 @@ class AppPreferenceFragment : BasePreferenceFragment(), SharedPreferences.OnShar
 
         //val budgetPreference = findPreference("budget")
         //budgetPreference.summary = if (appPreferences.budget > 0) {
-        //    NumberFormat.getCurrencyInstance().format(appPreferences.budget)
+        //    NumberFormat.getCurrencyInstance().formatWithSymbol(appPreferences.budget)
         //} else {
         //    ""
         //}

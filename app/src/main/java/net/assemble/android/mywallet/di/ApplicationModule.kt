@@ -10,6 +10,7 @@ import com.github.salomonbrys.kodein.singleton
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import net.assemble.android.common.filter.CurrencyFormatInputFilter
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.helper.PackageInfoHelper
 import net.assemble.android.mywallet.preferences.AppPreferences
@@ -17,6 +18,7 @@ import net.assemble.android.mywallet.repository.FirestoreRepository
 import net.assemble.android.mywallet.repository.FirestoreRepositoryInterface
 import net.assemble.android.mywallet.repository.ItemRepository
 import net.assemble.android.mywallet.repository.ItemRepositoryInterface
+import java.util.*
 
 fun applicationModule(application: Application) = Kodein.Module {
     bind<Application>() with instance(application)
@@ -53,5 +55,9 @@ fun applicationModule(application: Application) = Kodein.Module {
 
     bind<ItemRepositoryInterface>() with singleton {
         ItemRepository(instance(), instance(), instance())
+    }
+
+    bind<CurrencyFormatInputFilter>() with singleton {
+        CurrencyFormatInputFilter(Locale.getDefault())
     }
 }

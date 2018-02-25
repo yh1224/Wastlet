@@ -6,15 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import net.assemble.android.common.filter.CurrencyFormatInputFilter
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
 import net.assemble.android.mywallet.entity.WalletItem
-import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 class WalletItemAdapter(
         private val data: List<WalletItem>,
+        private val currencyFormatInputFilter: CurrencyFormatInputFilter,
         private val bus: RxBus
 ) : RecyclerView.Adapter<WalletItemAdapter.ItemViewHolder>() {
     class ItemViewHolder(itemView: View) : ViewHolder(itemView) {
@@ -42,6 +43,6 @@ class WalletItemAdapter(
         val item = data[position]
         holder.date.text = SimpleDateFormat("yyyy/MM/dd", Locale.US).format(item.date)
         holder.note.text = item.note
-        holder.fee.text = NumberFormat.getCurrencyInstance().format(item.fee)
+        holder.fee.text = currencyFormatInputFilter.formatWithSymbol(item.fee)
     }
 }

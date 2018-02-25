@@ -13,17 +13,18 @@ import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.disposables.CompositeDisposable
 import net.assemble.android.common.extensions.plusAssign
 import net.assemble.android.common.extensions.with
+import net.assemble.android.common.filter.CurrencyFormatInputFilter
 import net.assemble.android.common.fragment.BaseFragment
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
 import net.assemble.android.mywallet.databinding.FragmentItemListBinding
 import net.assemble.android.mywallet.repository.ItemRepositoryInterface
 import net.assemble.android.mywallet.widget.WalletItemAdapter
-import java.text.NumberFormat
 
 class ItemListFragment : BaseFragment() {
     // Instances injected by Kodein
     private val itemRepository: ItemRepositoryInterface by instance()
+    private val currencyFormatInputFilter: CurrencyFormatInputFilter by instance()
     private val bus: RxBus by instance()
 
     // Bindings
@@ -99,8 +100,8 @@ class ItemListFragment : BaseFragment() {
                 .subscribe { diaries ->
                     val totalFee = diaries.map { it.fee }.sum()
                     binding.totalFee.text = getString(R.string.total_fee,
-                            NumberFormat.getCurrencyInstance().format(totalFee))
-                    binding.recyclerView.adapter = WalletItemAdapter(diaries, bus)
+                            currencyFormatInputFilter.formatWithSymbol(totalFee))
+                    binding.recyclerView.adapter = WalletItemAdapter(diaries, currencyFormatInputFilter, bus)
                 }
     }
 
