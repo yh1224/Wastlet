@@ -5,8 +5,8 @@ import android.support.v7.widget.Toolbar
 import com.github.salomonbrys.kodein.instance
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import net.assemble.android.common.activity.BaseActivity
-import net.assemble.android.common.extensions.plusAssign
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
 import net.assemble.android.mywallet.fragment.AppPreferenceFragment
@@ -36,7 +36,7 @@ class AppPreferenceActivity : BaseActivity() {
                 .replace(R.id.content, AppPreferenceFragment.newInstance())
                 .commit()
 
-        disposables += bus.toObservable()
+        bus.toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { event ->
                     when (event) {
@@ -45,6 +45,7 @@ class AppPreferenceActivity : BaseActivity() {
                         }
                     }
                 }
+                .addTo(disposables)
     }
 
     override fun onDestroy() {

@@ -14,8 +14,8 @@ import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import net.assemble.android.common.activity.BaseActivity
-import net.assemble.android.common.extensions.plusAssign
 import net.assemble.android.common.extensions.toObservable
 import net.assemble.android.common.fragment.AlertDialogFragment
 import net.assemble.android.mywallet.R
@@ -86,7 +86,7 @@ class LoginActivity : BaseActivity() {
             if (result.isSuccess) {
                 val account = result.signInAccount!!
                 val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-                disposables += firebaseAuth.signInWithCredential(credential)
+                firebaseAuth.signInWithCredential(credential)
                         .toObservable()
                         .subscribe({}, { t ->
                             if (t is FirebaseNetworkException) {
@@ -95,6 +95,7 @@ class LoginActivity : BaseActivity() {
 
                             }
                         })
+                        .addTo(disposables)
             } else {
                 if (result.status.statusCode == GoogleSignInStatusCodes.SIGN_IN_CANCELLED) {
                     finish()

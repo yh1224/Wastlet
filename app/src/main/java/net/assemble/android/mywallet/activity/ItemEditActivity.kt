@@ -5,8 +5,8 @@ import android.support.v7.widget.Toolbar
 import com.github.salomonbrys.kodein.instance
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import net.assemble.android.common.activity.BaseActivity
-import net.assemble.android.common.extensions.plusAssign
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
 import net.assemble.android.mywallet.entity.WalletItem
@@ -31,7 +31,7 @@ class ItemEditActivity : BaseActivity() {
 
         disposables = CompositeDisposable()
 
-        disposables += bus.toObservable()
+        bus.toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { event ->
                     when (event) {
@@ -40,6 +40,7 @@ class ItemEditActivity : BaseActivity() {
                         }
                     }
                 }
+                .addTo(disposables)
 
         if (supportFragmentManager.findFragmentByTag(ItemEditFragment::class.java.simpleName) == null) {
             val itemInfo = intent.getSerializableExtra(EXTRA_ITEM_INFO) as WalletItem?

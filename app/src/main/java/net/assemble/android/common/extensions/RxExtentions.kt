@@ -7,15 +7,6 @@ import android.view.View
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-
-/*
- * disposables.add() の代わりに disposables += と書けるようにする
- */
-operator fun CompositeDisposable.plusAssign(disposable: Disposable) {
-    add(disposable)
-}
 
 /*
  * 処理中は指定した View を表示

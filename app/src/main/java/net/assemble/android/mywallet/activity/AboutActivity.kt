@@ -15,9 +15,9 @@ import com.github.salomonbrys.kodein.instance
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import net.assemble.android.common.activity.BaseActivity
-import net.assemble.android.common.extensions.plusAssign
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
 import net.assemble.android.mywallet.helper.PackageInfoHelper
@@ -94,7 +94,7 @@ class AboutActivity : BaseActivity() {
             itemAnimator = DefaultItemAnimator()
 
             // Read licenses from Yaml
-            disposables += Single.fromCallable {
+            Single.fromCallable {
                 try {
                     Yaml().load<List<Map<String, Any>>>(assets.open(LICENSES_YAML))
                             .filter { (it["skip"] as Boolean?) != true }
@@ -107,6 +107,7 @@ class AboutActivity : BaseActivity() {
                     .subscribe { licenses ->
                         adapter = LicenseAdapter(licenses, bus)
                     }
+                    .addTo(disposables)
         }
 
         // Support

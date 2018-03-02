@@ -17,8 +17,8 @@ import com.google.android.gms.ads.AdView
 import com.google.firebase.auth.FirebaseAuth
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import net.assemble.android.common.activity.BaseActivity
-import net.assemble.android.common.extensions.plusAssign
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
 import net.assemble.android.mywallet.databinding.ActivityMainBinding
@@ -88,7 +88,7 @@ class MainActivity : BaseActivity()
         val adRequest = AdRequest.Builder().setRequestAgent("android_studio:ad_template").build()
         adView.loadAd(adRequest)
 
-        disposables += bus.toObservable()
+        bus.toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { event ->
                     when (event) {
@@ -99,6 +99,7 @@ class MainActivity : BaseActivity()
                         is WalletItemAdapter.OnItemClickEvent -> startEditActivity(event.itemInfo)
                     }
                 }
+                .addTo(disposables)
     }
 
     /**

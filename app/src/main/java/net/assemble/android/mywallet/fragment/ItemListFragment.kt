@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import com.github.salomonbrys.kodein.instance
 import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.disposables.CompositeDisposable
-import net.assemble.android.common.extensions.plusAssign
+import io.reactivex.rxkotlin.addTo
 import net.assemble.android.common.extensions.with
 import net.assemble.android.common.filter.CurrencyFormatInputFilter
 import net.assemble.android.common.fragment.BaseFragment
@@ -95,7 +95,7 @@ class ItemListFragment : BaseFragment() {
      */
     private fun refresh() {
         // 一覧を RecyclerView に適用
-        disposables += itemRepository.getMonthly(year, month)
+        itemRepository.getMonthly(year, month)
                 .with(binding.swipeRefresh)
                 .subscribe { diaries ->
                     val totalFee = diaries.map { it.fee }.sum()
@@ -103,6 +103,7 @@ class ItemListFragment : BaseFragment() {
                             currencyFormatInputFilter.formatWithSymbol(totalFee))
                     binding.recyclerView.adapter = WalletItemAdapter(diaries, currencyFormatInputFilter, bus)
                 }
+                .addTo(disposables)
     }
 
     override fun onPause() {
