@@ -1,4 +1,4 @@
-package net.assemble.android.common.fragment
+package net.assemble.android.mywallet.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

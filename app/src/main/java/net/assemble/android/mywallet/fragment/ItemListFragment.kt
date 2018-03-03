@@ -14,7 +14,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import net.assemble.android.common.extensions.with
 import net.assemble.android.common.filter.CurrencyFormatInputFilter
-import net.assemble.android.common.fragment.BaseFragment
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
 import net.assemble.android.mywallet.databinding.FragmentItemListBinding

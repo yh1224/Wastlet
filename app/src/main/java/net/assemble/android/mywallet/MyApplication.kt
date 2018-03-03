@@ -1,20 +1,22 @@
 package net.assemble.android.mywallet
 
+import android.support.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
-import com.github.salomonbrys.kodein.Kodein
-import com.github.salomonbrys.kodein.lazy
+import com.github.salomonbrys.kodein.*
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.jakewharton.threetenabp.AndroidThreeTen
 import io.fabric.sdk.android.Fabric
-import net.assemble.android.common.BaseApplication
 import net.assemble.android.mywallet.di.applicationModule
 import timber.log.Timber
 
-class MyApplication : BaseApplication() {
+class MyApplication : MultiDexApplication(),
+        KodeinAware, KodeinInjected {
+    override val injector: KodeinInjector = KodeinInjector()
+
     override val kodein: Kodein by Kodein.lazy {
         import(applicationModule(this@MyApplication))
     }

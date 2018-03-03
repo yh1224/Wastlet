@@ -14,7 +14,6 @@ import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import net.assemble.android.common.filter.CurrencyFormatInputFilter
-import net.assemble.android.common.fragment.BaseFragment
 import net.assemble.android.common.fragment.DatePickerDialogFragment
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.common.viewmodel.BundleAwareViewModelFactory

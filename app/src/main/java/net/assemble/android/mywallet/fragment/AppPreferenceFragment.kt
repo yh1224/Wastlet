@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import com.github.salomonbrys.kodein.instance
 import com.google.firebase.auth.FirebaseAuth
-import net.assemble.android.common.fragment.BasePreferenceFragment
 import net.assemble.android.common.util.RxBus
 import net.assemble.android.mywallet.R
 import net.assemble.android.mywallet.preferences.AppPreferences

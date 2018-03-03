@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import net.assemble.android.common.activity.BaseActivity
 import net.assemble.android.common.extensions.toObservable
 import net.assemble.android.common.fragment.AlertDialogFragment
 import net.assemble.android.mywallet.R

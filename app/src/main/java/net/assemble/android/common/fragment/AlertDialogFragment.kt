@@ -2,9 +2,10 @@ package net.assemble.android.common.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 
-class AlertDialogFragment : BaseDialogFragment() {
+class AlertDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(activity!!)
                 .setTitle(arguments?.getString(ARG_DIALOG_TITLE))
