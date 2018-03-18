@@ -2,12 +2,12 @@ package net.assemble.android.common.filter
 
 import android.text.InputFilter
 import android.text.Spanned
+import java.text.NumberFormat
 import java.util.*
 import java.util.regex.Pattern
 
-open class CurrencyFormat(private val locale: Locale) : InputFilter {
+open class CurrencyFormat(locale: Locale) : InputFilter {
     private val currency = Currency.getInstance(locale)!!
-    private val symbol = currency.symbol
     protected val fractionDigits = currency.defaultFractionDigits
     private val fractionPow = (1..fractionDigits).fold(1, { acc, _ -> acc * 10 })
 
@@ -31,7 +31,8 @@ open class CurrencyFormat(private val locale: Locale) : InputFilter {
      *
      * @param fee 金額(整数値)
      */
-    fun formatWithSymbol(fee: Int) = symbol + format(fee)
+    fun formatCurrency(fee: Int): String = NumberFormat.getCurrencyInstance()
+            .format(fee + (fee % fractionPow).toDouble() / fractionPow)
 
     /**
      * 金額(小数値)を金額(整数値)に変換

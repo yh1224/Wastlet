@@ -43,6 +43,6 @@ class WalletItemAdapter(
         val item = data[position]
         holder.date.text = SimpleDateFormat("yyyy/MM/dd", Locale.US).format(item.date)
         holder.note.text = item.note
-        holder.fee.text = currencyFormatInputFilter.formatWithSymbol(item.fee)
+        holder.fee.text = currencyFormatInputFilter.formatCurrency(item.fee)
     }
 }

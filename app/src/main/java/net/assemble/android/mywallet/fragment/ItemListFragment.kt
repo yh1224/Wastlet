@@ -99,7 +99,7 @@ class ItemListFragment : BaseFragment() {
                 .subscribe { diaries ->
                     val totalFee = diaries.map { it.fee }.sum()
                     binding.totalFee.text = getString(R.string.total_fee,
-                            currencyFormatInputFilter.formatWithSymbol(totalFee))
+                            currencyFormatInputFilter.formatCurrency(totalFee))
                     binding.recyclerView.adapter = WalletItemAdapter(diaries, currencyFormatInputFilter, bus)
                 }
                 .addTo(disposables)
