@@ -106,7 +106,7 @@ class ItemEditFragment : BaseFragment()
         binding.itemFeeEdit.filters = arrayOf(currencyFormatInputFilter)
 
         binding.itemDate.clicks().subscribe {
-            val d = viewModel.date.get().split("/")
+            val d = viewModel.date.get()!!.split("/")
             DatePickerDialogFragment.newInstance(d[0].toInt(), d[1].toInt(), d[2].toInt()).show(childFragmentManager, DatePickerDialogFragment::class.java.simpleName)
         }.addTo(disposables)
 
@@ -154,7 +154,7 @@ class ItemEditFragment : BaseFragment()
     private fun onOkClicked() {
         // Validate fee
         val feeNum = try {
-            currencyFormatInputFilter.parse(viewModel.fee.get())
+            currencyFormatInputFilter.parse(viewModel.fee.get()!!)
         } catch (e: NumberFormatException) {
             binding.itemFeeEdit.error = getString(R.string.error_fee_invalid)
             binding.itemFeeEdit.requestFocus()
@@ -164,7 +164,7 @@ class ItemEditFragment : BaseFragment()
         val itemInfo = ((arguments?.getSerializable(ARG_ITEM_INFO) as WalletItem?)
                 ?: WalletItem()).apply {
             fee = feeNum
-            note = viewModel.note.get()
+            note = viewModel.note.get()!!
             date = SimpleDateFormat("yyyy/MM/dd", Locale.US).parse(viewModel.date.get()).time
         }
         itemRepository.save(itemInfo)

@@ -14,7 +14,7 @@ fun <TResult> Task<TResult>.toObservable(): Observable<TResult> =
         Observable.create { emitter ->
             addOnSuccessListener {
                 if (!emitter.isDisposed) {
-                    emitter.onNext(result)
+                    emitter.onNext(result!!)
                     emitter.onComplete()
                 }
             }
@@ -26,7 +26,7 @@ fun <TResult> Task<TResult>.toObservable(): Observable<TResult> =
 fun <TResult> Task<TResult>.toSingle(): Single<TResult> =
         Single.create { emitter ->
             addOnSuccessListener {
-                if (!emitter.isDisposed) emitter.onSuccess(result)
+                if (!emitter.isDisposed) emitter.onSuccess(result!!)
             }
             addOnFailureListener { e ->
                 if (!emitter.isDisposed) emitter.onError(e)
