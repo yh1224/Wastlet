@@ -1,8 +1,8 @@
 package net.assemble.android.common.viewmodel
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
 class BundleAwareViewModelFactory(
         private val bundle: Bundle?,

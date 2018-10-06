@@ -1,13 +1,13 @@
 package net.assemble.android.mywallet.fragment
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.salomonbrys.kodein.instance
 import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.disposables.CompositeDisposable

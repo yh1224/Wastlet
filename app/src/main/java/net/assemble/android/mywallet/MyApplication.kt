@@ -1,6 +1,6 @@
 package net.assemble.android.mywallet
 
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.github.salomonbrys.kodein.*

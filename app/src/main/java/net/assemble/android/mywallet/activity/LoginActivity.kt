@@ -2,9 +2,9 @@ package net.assemble.android.mywallet.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.github.salomonbrys.kodein.instance
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions

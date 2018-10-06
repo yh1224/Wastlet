@@ -3,28 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v4.widget.DrawerLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context="net.assemble.android.mywallet.activity.MainActivity">
 
-            <android.support.design.widget.AppBarLayout
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/AppTheme.AppBarOverlay">
 
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/colorPrimary"
                     app:popupTheme="@style/AppTheme.PopupOverlay" />
-            </android.support.design.widget.AppBarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,19 +50,19 @@
                         android:indeterminate="true"
                         android:visibility="gone" />
 
-                    <android.support.v4.view.ViewPager
+                    <androidx.viewpager.widget.ViewPager
                         android:id="@+id/pager"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <android.support.v4.view.PagerTitleStrip
+                        <androidx.viewpager.widget.PagerTitleStrip
                             android:id="@+id/pagerTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
                             android:paddingBottom="12dp"
                             android:paddingTop="12dp" />
-                    </android.support.v4.view.ViewPager>
+                    </androidx.viewpager.widget.ViewPager>
                 </FrameLayout>
 
                 <com.google.android.gms.ads.AdView
@@ -74,14 +74,14 @@
                     app:layout_behavior="@string/bottom_sheet_behavior"
                     tools:layout_behavior="@string/bottom_sheet_behavior" />
             </LinearLayout>
-        </android.support.design.widget.CoordinatorLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <android.support.design.widget.NavigationView
+        <com.google.android.material.navigation.NavigationView
             android:id="@+id/drawerNavigation"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:headerLayout="@layout/drawer_header"
             app:menu="@menu/drawer" />
-    </android.support.v4.widget.DrawerLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

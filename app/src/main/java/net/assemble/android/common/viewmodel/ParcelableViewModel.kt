@@ -1,7 +1,7 @@
 package net.assemble.android.common.viewmodel
 
-import android.arch.lifecycle.ViewModel
 import android.os.Bundle
+import androidx.lifecycle.ViewModel
 
 abstract class ParcelableViewModel : ViewModel() {
     abstract fun writeTo(bundle: Bundle)

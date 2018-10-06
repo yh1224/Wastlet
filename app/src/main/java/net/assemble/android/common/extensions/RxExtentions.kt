@@ -2,8 +2,8 @@
 
 package net.assemble.android.common.extensions
 
-import android.support.v4.widget.SwipeRefreshLayout
 import android.view.View
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single

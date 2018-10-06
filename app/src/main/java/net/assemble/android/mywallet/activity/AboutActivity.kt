@@ -3,14 +3,12 @@ package net.assemble.android.mywallet.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.RecyclerView
 import com.github.salomonbrys.kodein.instance
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -87,10 +85,10 @@ class AboutActivity : BaseActivity() {
         // ライセンス
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         with(recyclerView) {
-            layoutManager = LinearLayoutManager(this@AboutActivity).apply {
-                orientation = LinearLayoutManager.VERTICAL
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@AboutActivity).apply {
+                orientation = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
             }
-            itemAnimator = DefaultItemAnimator()
+            itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
 
             // Read licenses from Yaml
             Single.fromCallable {

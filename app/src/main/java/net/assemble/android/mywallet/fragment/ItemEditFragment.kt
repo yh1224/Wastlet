@@ -1,15 +1,15 @@
 package net.assemble.android.mywallet.fragment
 
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
-import android.databinding.ObservableField
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableField
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.github.salomonbrys.kodein.instance
+import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo

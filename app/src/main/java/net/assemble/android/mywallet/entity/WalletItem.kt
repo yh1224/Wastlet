@@ -1,6 +1,6 @@
 package net.assemble.android.mywallet.entity
 
-import android.support.annotation.Keep
+import androidx.annotation.Keep
 import com.google.firebase.firestore.Exclude
 import java.io.Serializable
 import java.util.*

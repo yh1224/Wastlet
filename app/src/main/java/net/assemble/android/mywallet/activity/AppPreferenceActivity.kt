@@ -1,7 +1,7 @@
 package net.assemble.android.mywallet.activity
 
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import com.github.salomonbrys.kodein.instance
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

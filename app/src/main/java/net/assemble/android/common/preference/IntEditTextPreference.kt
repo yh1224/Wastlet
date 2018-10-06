@@ -3,8 +3,8 @@
 package net.assemble.android.common.preference
 
 import android.content.Context
-import android.support.v7.preference.EditTextPreference
 import android.util.AttributeSet
+import androidx.preference.EditTextPreference
 
 class IntEditTextPreference : EditTextPreference {
     constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
